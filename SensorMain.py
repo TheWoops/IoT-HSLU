@@ -22,18 +22,12 @@ def connect_to_mqtt():
 
             # Neue Client-Instanz mit unique Identifier "client"
             client = paho.Client("client")
-
-            # Definition 'Last will message' des Sensors, welche beim Broker hinterlegt wird
-            last_will_message="TIsensorCC2650 nicht verbunden!"
-            print("   Setting Last will message = ",last_will_message)
             print("   Topic ist :", sensor_topic)
-            client.will_set(sensor_topic,last_will_message,qos = 0,retain=True)
-
             client.on_connect = on_connect
 
             # Verbindungsaufbau um Broker, welcher Default auf Port 1883 läuft
             client.connect(broker,port=1883)
-            # Die Methode loop_start starten einen Thread, welcher sich um die Verbindung zum Broker
+            # Die Methode loop_start startet einen Thread, welcher sich um die Verbindung zum Broker
             # und das Senden/Empfangen der Daten kümmert
             client.loop_start()
 
@@ -95,7 +89,7 @@ time.sleep(1.0) # Kleine Zeitverzögerung um sicherzustellen, dass Sensoren die 
 
 # Erste Abfrage Sensoren und Ausgabe auf Kommandozeile
 print("Luftfeuchtigkeit: {}".format(SensorTag.readHumidity()))
-print("Luftfeuchtigkeit: {}".format(SensorTag.readTemperature()))
+print("Temperatur: {}".format(SensorTag.readTemperature()))
 print("Beschleunigung: {}".format(SensorTag.readAccelerometer()))
 print("Barometer: {}".format(SensorTag.readBarometer()))
 print("Gyroskop: {}".format(SensorTag.readGyroscope()))

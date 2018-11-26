@@ -23,19 +23,19 @@ class SensorTag(Peripheral):
         data =  Peripheral.readCharacteristic(self,0x003c) # alle 18 bytes einlesen (zwei bytes je Achse)
         data = struct.unpack("<9h", data)[0:3]  # Umwandlung signed Integers(C) in Integer(Python) und Slicing
         x_y_z = tuple([ elem * (500.0 / 65536.0) for elem in data ]) # Umrechnung gemäß Doku
-        return x_y_z
+        return x_y_z           # optional als string' '.join(format(f, '.5f') for f in x_y_z)
 
     def readAccelerometer(self):
         data =  Peripheral.readCharacteristic(self,0x003c) # alle 18 bytes einlesen (zwei bytes je Achse)
         data = struct.unpack("<9h", data)[3:6] # Umwandlung signed Integers(C) in Integer(Python) und Slicing
         x_y_z = tuple([ elem * (4.0 / 32768.0) for elem in data ]) # Umrechnung gemäß Doku mit Acc.- Range 4G
-        return x_y_z
+        return x_y_z           # optional als string' '.join(format(f, '.5f') for f in x_y_z)
 
     def readMagnetometer(self):
         data =  Peripheral.readCharacteristic(self,0x003c) # alle 18 bytes einlesen (zwei bytes je Achse)
         data = struct.unpack("<9h", data)[6:7] # Umwandlung signed Integers(C) in Integer(Python) und Slicing
         data = data[0] # Umwandlung Tuple in Int
-        return data
+        return ("{:.2f}".format(data))
 
 
     # -----------Optical Sensor------------------------
@@ -47,7 +47,8 @@ class SensorTag(Peripheral):
         data = struct.unpack('<h', data) [0]
         m = data & 0xFFF;
         e = (data & 0xF000) >> 12;
-        return ("{:6.2f}".format(0.01 * (m << e)))
+        result = 0.01 * (m << e)
+        return ("{:.2f}".format(result)) # Formatierung
 
     # -----------Humidity Sensor-------------------------
     def enableHumidity(self):
@@ -57,13 +58,13 @@ class SensorTag(Peripheral):
         data =  Peripheral.readCharacteristic(self,0x002c)
         (rawT, rawH) = struct.unpack('<HH', data)
         RH = (rawH / 65536.0) * 100.0
-        return ("{:4.2f}".format(RH))
+        return ("{:.2f}".format(RH))
 
     def readTemperature(self):
         data =  Peripheral.readCharacteristic(self,0x002c)
         (rawT, rawH) = struct.unpack('<HH', data)
         temp = (rawT / 65536.0) * 165.0 -40.0
-        return ("{:4.2f}".format(temp))
+        return ("{:.2f}".format(temp))
 
     # -----------Barometer Sensor-------------------------
     def enableBarometer(self):
@@ -75,7 +76,7 @@ class SensorTag(Peripheral):
         (tL,tM,tH,pL,pM,pH) = struct.unpack('<6B', data)
         temp = (tH*65536 + tM*256 + tL) / 100.0 # nicht im return statement,Temperatur kommt vom Feuchtigkeitssensor
         press = (pH*65536 + pM*256 + pL) / 100.0
-        return ("{:6.2f}".format(temp,press))
+        return ("{:.2f}".format(temp,press))
 
     # -------------Battery Status------------------
     def readBattery(self):
