@@ -1,2 +1,3 @@
 # IoT--HSLU
-Code for IoT Project
+
+Code für IoT Projekt Gruppe 3
