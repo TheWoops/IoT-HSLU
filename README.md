@@ -12,5 +12,5 @@
 
 - Python3 Interpreter auf dem RaspberryPi
 - Library [Bluepy](https://github.com/IanHarvey/bluepy) installiert (= Python interface für Bluetooth LE on Linux)
-- Paho [MQTT Python client library](https://pypi.org/project/paho-mqtt/) installiert
+- [Paho MQTT Python client library](https://pypi.org/project/paho-mqtt/) installiert
 - RaspberryPi im Hochschulnetz oder im VPN
