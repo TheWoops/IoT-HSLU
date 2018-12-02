@@ -1,7 +1,7 @@
 # Repository zum IoT-Projekt HSLU (Gruppe 3)
 
 
-### Python-Skripte für Sensoranbindung
+### Python-Skripte für Sensoranbindung eines [TISensorTags](www.ti.com/sensortag)
 
 - Class_SensorTag.py beeinhaltet die Objektorientierte Abbildung des TI SensorTags
 - SensorMain.py beeinhaltet das Hauptprogramm zu Lesen der Sensorwerte und Senden der Daten an den MQTT-Broker
