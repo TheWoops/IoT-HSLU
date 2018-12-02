@@ -55,7 +55,7 @@ def connect_to_mqtt():
                     print(payload)
                     print("")
                     client.publish(sensor_topic, payload, retain=True)  # retain=True um Message als retained message beim Broker zu hinterlegen
-                    time.sleep(5.0) # Sobald Variable Connected=True wird alle 5 Sekunden gesendet
+                    time.sleep(t) # Sobald Variable Connected=True wird alle 5 Sekunden gesendet
 
             except KeyboardInterrupt:
                 client.disconnect()
@@ -69,6 +69,16 @@ import json
 import time
 import paho.mqtt.client as paho
 import paho.mqtt.publish as publish
+import argparse
+
+# Parser, welche als optionales Argument ein Float entgegen nimmt.
+# Festgelegt kann hiermit der Sendeabstand des Sensors in Sekunden
+parser = argparse.ArgumentParser(); # Instantierung Parser
+parser.add_argument("-t", action="store", type=float, default = 5.0)
+args = parser.parse_args()
+t = args.t
+print("Sendeabstand {} Sekunden".format(t))
+print("")
 
 # Output Kommandozeile mit Bluetooth Adresse des Sensors
 print('Connecting to ' + '98:07:2D:27:F1:86')
