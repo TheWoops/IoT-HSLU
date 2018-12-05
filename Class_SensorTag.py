@@ -1,13 +1,13 @@
 import sys
-sys.path.append('../')  # Oberverzeichnis zum Suchpfad für Module hinzufuegen (fü Python-Interpreter)
+sys.path.append('../')  # Oberverzeichnis zum Suchpfad für Module hinzufuegen (für Python-Interpreter)
                         # ansonsten wird Modul btle, welches sich im Oberverzeichnis befindet nicht gefunden
 
 from btle import UUID, Peripheral, DefaultDelegate, AssignedNumbers
 import struct
 
-# Klasse übernommen von bluepy
+
+class SensorTag(Peripheral):# Klasse Peripheral aus bluepy library
 # Weitere Detailinformationen unter: http://ianharvey.github.io/bluepy-doc/peripheral.html#peripheral
-class SensorTag(Peripheral):
 
     #Instantierung
     def __init__(self):
