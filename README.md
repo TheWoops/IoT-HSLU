@@ -1,4 +1,4 @@
-# Repository zum IoT-Projekt HSLU (Gruppe 3)
+# Repository zum IoT-Projekt HSLU
 
 
 ### Python-Skripte für Sensoranbindung eines [TISensorTags](http://www.ti.com/ww/en/wireless_connectivity/sensortag/)
